@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexusStudio | Interactive Dashboard & Physics Lab</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-theme="cyber">
+  <div class="app-layout">
+    <!-- Header Navbar -->
+    <header class="navbar">
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        <span>Nexus<strong>Studio</strong></span>
+      </div>
+
+      <nav class="nav-tabs">
+        <button class="tab-btn active" data-target="analytics">📊 Analytics Engine</button>
+        <button class="tab-btn" data-target="particles">✨ Particle Physics</button>
+        <button class="tab-btn" data-target="synth">🎹 Synth Matrix</button>
+      </nav>
+
+      <div class="header-controls">
+        <label for="theme-select" class="sr-only">Theme</label>
+        <select id="theme-select" class="dropdown">
+          <option value="cyber">Cyberpunk Dark</option>
+          <option value="clean">Minimal Light</option>
+          <option value="solar">Solar Flare</option>
+        </select>
+        <button id="sound-toggle" class="btn btn-icon" title="Toggle Sound Feedback">
+          <span id="sound-status-icon">🔊</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Panel 1: Analytics & Data Sandbox -->
+      <section id="analytics" class="tab-panel active">
+        <div class="grid grid-2">
+          <!-- Control & Data Table Card -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Live Data Input & Analysis</h3>
+              <div class="action-row">
+                <button id="btn-add-metric" class="btn btn-sm btn-primary">+ Add Row</button>
+                <button id="btn-randomize" class="btn btn-sm btn-secondary">🎲 Randomize</button>
+              </div>
+            </div>
+
+            <div class="table-container">
+              <table id="metrics-table">
+                <thead>
+                  <tr>
+                    <th>Metric Label</th>
+                    <th>Score (1-100)</th>
+                    <th>Category</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="metrics-body">
+                  <!-- Generated dynamically -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="stats-summary" id="stats-summary">
+              <!-- Statistical outputs calculated here -->
+            </div>
+          </div>
+
+          <!-- Dynamic Canvas Chart Card -->
+          <div class="card flex-col">
+            <div class="card-header">
+              <h3>Real-Time Canvas Visualizer</h3>
+              <div class="chart-type-selector">
+                <button class="btn btn-sm chart-btn active" data-type="bar">Bar</button>
+                <button class="btn btn-sm chart-btn" data-type="line">Line</button>
+                <button class="btn btn-sm chart-btn" data-type="radar">Radar</button>
+              </div>
+            </div>
+            <div class="canvas-wrapper">
+              <canvas id="chart-canvas" width="500" height="320"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Panel 2: Interactive Particle Physics Canvas -->
+      <section id="particles" class="tab-panel">
+        <div class="card no-padding physics-card">
+          <div class="physics-toolbar">
+            <div class="tool-group">
+              <label>Particle Count: <span id="particle-count-val">100</span></label>
+              <input type="range" id="particle-slider" min="20" max="250" value="100" />
+            </div>
+            <div class="tool-group">
+              <label>Mode:</label>
+              <button class="btn btn-sm pmode-btn active" data-mode="connect">Constellation</button>
+              <button class="btn btn-sm pmode-btn" data-mode="gravity">Gravity</button>
+              <button class="btn btn-sm pmode-btn" data-mode="vortex">Vortex</button>
+            </div>
+            <button id="btn-clear-canvas" class="btn btn-sm btn-danger">Reset</button>
+          </div>
+          <canvas id="physics-canvas"></canvas>
+          <div class="physics-hint">Move cursor or tap inside canvas to interact with dynamic force fields</div>
+        </div>
+      </section>
+
+      <!-- Panel 3: Interactive Web Audio Synth -->
+      <section id="synth" class="tab-panel">
+        <div class="card text-center synth-card">
+          <div class="card-header">
+            <h3>Polyphonic Web Audio Synthesizer</h3>
+            <div class="tool-group inline">
+              <label for="wave-type">Waveform:</label>
+              <select id="wave-type" class="dropdown">
+                <option value="sine">Sine</option>
+                <option value="triangle" selected>Triangle</option>
+                <option value="sawtooth">Sawtooth</option>
+                <option value="square">Square</option>
+              </select>
+            </div>
+          </div>
+          <p class="subtitle">Click the keys or use keyboard numbers [1] to [8] to play frequencies</p>
+          
+          <div class="piano-keyboard" id="piano-keyboard">
+            <!-- Dynamically populated piano keys -->
+          </div>
+
+          <div class="oscillator-visualizer-container">
+            <canvas id="oscilloscope" width="600" height="120"></canvas>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>ZeroCode Architecture Standard &bull; Vanilla Engine</span>
+      <span id="fps-counter">Performance: 60 FPS</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
